@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CampoTexto from '../CampoTexto';
 import './Formulario.css'
 import Botao from '../Botao';
+import ListaHorario from '../ListaHorario';
+import Calendario from '../Calendario';
 
-const Formulario = () => {
+const Formulario = (props) => {
    const [nome, setNome] = useState('')
    const [email, setEmail] = useState('')
    const [dataNascimento, setDataNascimento] = useState('')
@@ -11,8 +13,19 @@ const Formulario = () => {
    const [cidade, setCidade] = useState('');
    const [errorEmail, setErrorEmail] = useState('');
    const [errorTelefone, setErrorTelefone] = useState('');
-
-  
+   const [horarios, setHorarios] = useState([])
+   const [horarioSelecionado, setHorarioSelecionado] = useState('');
+   const [data, setData] = useState('')
+    useEffect(()=>{
+        fetch("http://localhost:5000/horarios",{
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/Json'
+            }
+           }).then((resp)=> resp.json()).then((data) =>{
+            setHorarios(data)
+           }).catch((err) => console.log(err))
+    },[])
    const aoSalvar = (evento) =>{
     evento.preventDefault()
 
@@ -32,6 +45,7 @@ const Formulario = () => {
     setCidade('')
     setErrorEmail('')
     setErrorTelefone('')
+    setHorarioSelecionado('')
    }
 
    const validarEmail = (email) => {
@@ -44,9 +58,25 @@ const Formulario = () => {
   };
 
     return (
+    <div> 
         <section className='formulario'>
             <form onSubmit={aoSalvar}>
                 <h3>Preencha o Card Abaixo para Realizar o Agendamento da Visita</h3>
+                <div className='form'>
+                    <Calendario  
+                        label="Selecione uma data"
+                        minDate={new Date()}
+                        selected={data}
+                        onChange={date => setData(date)}
+                    />
+                    <ListaHorario
+                        label="Horário"
+                        obrigatorio
+                        options={horarios}
+                        valor={horarioSelecionado}
+                        aoAlterado={valor => setHorarioSelecionado(valor)}
+                    />
+               </div>
                 <CampoTexto  
                     label="Nome" 
                     placeholder="Digite o Seu Nome"
@@ -85,12 +115,13 @@ const Formulario = () => {
                     valor = {cidade}
                     aoAlterado={valor => setCidade(valor)}
                 />
+                  
                 <Botao>
                     Enviar Card
                 </Botao>
-
             </form>
         </section>
+    </div>
     );
 }
 

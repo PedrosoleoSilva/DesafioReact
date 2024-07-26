@@ -1,12 +1,11 @@
-
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css";
 import './Calendario.css'
-import { Calendar } from 'primereact/calendar';
-        
-
 const Calendario = (props) => {
     return (
         <div className='calendario'>
-            <Calendar onChange={props.onChange} value={props.value}  />
+             <label>{props.label}</label>
+            <DatePicker className="date" minDate={props.minDate}  selected={props.selected} onChange={props.onChange} value={props.value}  />
         </div>
     );
 }
