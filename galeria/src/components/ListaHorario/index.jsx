@@ -11,7 +11,7 @@ const ListaHorario = ({ options, label, obrigatorio, aoAlterado, valor }) => {
             <select onChange={aoSelecionar} required={obrigatorio} value={valor}>
                 <option value="">Selecione um horário</option>
                 {options.map((option) => (
-                    <option value={option.id} key={option.id}>{option.horario}</option>
+                    <option value={option.id} key={option.id}>{option.horario} Vagas:  {option.vagas}</option>
                 ))}
             </select>
         </div>

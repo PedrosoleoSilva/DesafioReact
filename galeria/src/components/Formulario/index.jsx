@@ -15,7 +15,26 @@ const Formulario = (props) => {
    const [errorTelefone, setErrorTelefone] = useState('');
    const [horarios, setHorarios] = useState([])
    const [horarioSelecionado, setHorarioSelecionado] = useState('');
-   const [data, setData] = useState('')
+   const [data, setData] = useState('');
+
+   const criarPostAgenda = (agenda) => {
+    agenda.cost = 0;
+    agenda.services = [];
+    fetch("http://localhost:5000/agenda", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json' // Corrigido para 'application/json'
+        },
+        body: JSON.stringify(agenda),
+    })
+    .then((resp) => resp.json())
+    .then((data) => {
+        console.log('Resposta do servidor:', data);
+    })
+    .catch((err) => console.log('Erro ao enviar dados:', err));
+};
+
+
     useEffect(()=>{
         fetch("http://localhost:5000/horarios",{
             method: "GET",
@@ -37,6 +56,18 @@ const Formulario = (props) => {
         setErrorTelefone('Por favor insira um número valido')
         return
       }
+
+      const Agenda = {
+        nome,
+        email,
+        dataNascimento,
+        telefone,
+        cidade,
+        data,
+        horarioSelecionado
+      }
+      console.log('Dados enviados para o backend:', Agenda);
+      criarPostAgenda(Agenda)
   
     setNome('')
     setEmail('')
@@ -60,7 +91,7 @@ const Formulario = (props) => {
     return (
     <div> 
         <section className='formulario'>
-            <form onSubmit={aoSalvar}>
+            <form  onSubmit={aoSalvar}>
                 <h3>Preencha o Card Abaixo para Realizar o Agendamento da Visita</h3>
                 <div className='form'>
                     <Calendario  
@@ -68,6 +99,7 @@ const Formulario = (props) => {
                         minDate={new Date()}
                         selected={data}
                         onChange={date => setData(date)}
+                        placeholderText="Selecione Uma data"
                     />
                     <ListaHorario
                         label="Horário"

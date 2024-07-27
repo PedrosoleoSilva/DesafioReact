@@ -2,7 +2,7 @@ import './Botao.css'
 
 const Botao = ({children}) => {
     return (
-        <button className='botao'>
+        <button  className='botao'>
             {children}
         </button>
     );
