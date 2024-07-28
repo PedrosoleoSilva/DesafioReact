@@ -22,7 +22,7 @@
    color: red;
 }
 
-.formulario .input-with-icon {
+.formulario .input{
     position: relative;
     margin-bottom: 15px;
 }
@@ -37,6 +37,6 @@
     padding-top: 35px;
 }
 
-.input-with-icon input {
+.input input {
     padding-left: 40px; /* Ajuste conforme necessário */
 }

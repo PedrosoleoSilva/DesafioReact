@@ -1,45 +1,140 @@
 {
-  "agenda": [],
   "horarios": [
     {
       "id": "1",
-      "horario": "08:00",
-      "vagas": 20
+      "data": "2024-07-29",
+      "horarios": [
+        {
+          "horario": "08:00",
+          "vagas": 20
+        },
+        {
+          "horario": "09:00",
+          "vagas": 20
+        },
+        {
+          "horario": "10:00",
+          "vagas": 20
+        },
+        {
+          "horario": "11:00",
+          "vagas": 20
+        },
+        {
+          "horario": "14:00",
+          "vagas": 20
+        },
+        {
+          "horario": "15:00",
+          "vagas": 20
+        },
+        {
+          "horario": "16:00",
+          "vagas": 20
+        },
+        {
+          "horario": "17:00",
+          "vagas": 20
+        }
+      ]
     },
     {
       "id": "2",
-      "horario": "09:00",
-      "vagas": 20
+      "data": "2024-07-30",
+      "horarios": [
+        {
+          "horario": "08:00",
+          "vagas": 20
+        },
+        {
+          "horario": "09:00",
+          "vagas": 20
+        },
+        {
+          "horario": "10:00",
+          "vagas": 20
+        },
+        {
+          "horario": "11:00",
+          "vagas": 20
+        },
+        {
+          "horario": "14:00",
+          "vagas": 20
+        },
+        {
+          "horario": "15:00",
+          "vagas": 20
+        },
+        {
+          "horario": "16:00",
+          "vagas": 20
+        },
+        {
+          "horario": "17:00",
+          "vagas": 20
+        }
+      ]
     },
     {
       "id": "3",
-      "horario": "10:00",
-      "vagas": 20
+      "data": "2024-07-31",
+      "horarios": [
+        {
+          "horario": "08:00",
+          "vagas": 20
+        },
+        {
+          "horario": "09:00",
+          "vagas": 20
+        },
+        {
+          "horario": "10:00",
+          "vagas": 20
+        },
+        {
+          "horario": "11:00",
+          "vagas": 20
+        },
+        {
+          "horario": "14:00",
+          "vagas": 20
+        },
+        {
+          "horario": "15:00",
+          "vagas": 20
+        },
+        {
+          "horario": "16:00",
+          "vagas": 20
+        },
+        {
+          "horario": "17:00",
+          "vagas": 20
+        }
+      ]
+    }
+  ],
+  "agenda": [
+    {
+      "id": "ce3b",
+      "nome": "ff",
+      "email": "ff@gmail.com",
+      "dataNascimento": "2024-07-15T03:00:00.000Z",
+      "telefone": "44997282988",
+      "cidade": "ff",
+      "data": "2024-07-30",
+      "horarioSelecionado": "09:00 Vagas: 20"
     },
     {
-      "id": "4",
-      "horario": "11:00",
-      "vagas": 20
-    },
-    {
-      "id": "5",
-      "horario": "14:00",
-      "vagas": 20
-    },
-    {
-      "id": "6",
-      "horario": "15:00",
-      "vagas": 20
-    },
-    {
-      "id": "7",
-      "horario": "16:00",
-      "vagas": 20
-    },
-    {
-      "id": "8",
-      "horario": "17:00",
-      "vagas": 20
+      "id": "a291",
+      "nome": "dd",
+      "email": "dd@gmail.com",
+      "dataNascimento": "2024-07-01T03:00:00.000Z",
+      "telefone": "44997282988",
+      "cidade": "ss",
+      "data": "2024-07-29",
+      "horarioSelecionado": "08:00 Vagas: 20"
     }
   ]
 }
