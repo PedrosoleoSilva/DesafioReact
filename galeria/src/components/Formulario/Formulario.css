@@ -2,16 +2,41 @@
     display: flex;
     justify-content: center;
     margin: 50px 0;
+  
 }
 
 .formulario form {
-    max-width: 100%;
-    background-color: #f2f2f2;
+    max-width: 80%;
+    background-color: #F2F2F2;
     border-radius: 20px;
-    padding: 32px 64px;
+    padding: 36px 64px;
+    box-shadow: 8px 16px rgb(0, 0, 0, 0.08);
 }
 .form{
     display: flex;
     gap: 20px; 
     margin-bottom: 24px;
+}
+
+.erro {
+   color: red;
+}
+
+.formulario .input-with-icon {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+    pointer-events: none;
+    padding-top: 35px;
+}
+
+.input-with-icon input {
+    padding-left: 40px; /* Ajuste conforme necessário */
 }

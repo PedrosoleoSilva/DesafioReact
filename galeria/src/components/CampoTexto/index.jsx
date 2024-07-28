@@ -8,7 +8,13 @@ const CampoTexto = (props) => {
     return (
         <div className='campo'>
             <label>{props.label}</label>
-            <input value={props.valor} onChange={aoDigitado}  type="text"  placeholder={props.placeholder} required={props.obrigatorio}/>
+            <input  
+                value={props.valor} 
+                onChange={aoDigitado}  
+                type="text"  
+                placeholder={props.placeholder} 
+                required={props.obrigatorio}
+            />      
         </div>
     );
 }

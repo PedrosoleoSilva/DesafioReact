@@ -1,0 +1,8 @@
+.calendario {
+    margin: 24px 0;
+}
+.calendario label {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 8px;
+}

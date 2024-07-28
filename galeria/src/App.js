@@ -1,5 +1,6 @@
 import Banner from "./components/Banner";
 import Formulario from "./components/Formulario";
+import Rodape from "./components/Rodape";
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
         <Banner/>
        <Formulario/>
+       <Rodape/>
     </div>
   );
 }
