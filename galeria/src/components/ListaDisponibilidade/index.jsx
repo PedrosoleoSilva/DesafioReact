@@ -16,7 +16,6 @@ const ListaDisponibilidade = ({ onDataSelect, onHorarioSelect }) => {
                 console.error('Erro ao buscar disponibilidade:', error);
             }
         };
-
         fetchDisponibilidade();
     }, []);
 
@@ -42,10 +41,8 @@ const ListaDisponibilidade = ({ onDataSelect, onHorarioSelect }) => {
                 const updatedData = [...disponibilidade];
                 updatedData[dataIndex] = { ...updatedData[dataIndex], horarios: horariosAtualizados };
 
-                // Atualiza a disponibilidade no JSON Server
                 await axios.put(`http://localhost:5000/horarios/${updatedData[dataIndex].id}`, updatedData[dataIndex]);
-
-                setHorariosDisponiveis(horariosAtualizados); // Atualiza o estado local
+                setHorariosDisponiveis(horariosAtualizados);
                 onHorarioSelect(horarioSelecionado);
             }
         } catch (error) {

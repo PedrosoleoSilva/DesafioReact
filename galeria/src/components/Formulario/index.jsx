@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 import './Formulario.css';
 import CampoTexto from '../CampoTexto';
 import Botao from '../Botao';
 import ListaDisponibilidade from '../ListaDisponibilidade';
-import { isWeekend, differenceInDays } from 'date-fns';
+import { isWeekend } from 'date-fns';
 import DataNascimento from '../CalendarioDataNascimento';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -20,40 +20,7 @@ const Formulario = () => {
     const [errorData, setErrorData] = useState('');
     const [horarioSelecionado, setHorarioSelecionado] = useState('');
     const [data, setData] = useState('');
-    const [disponibilidade, setDisponibilidade] = useState([]);
     const navigate = useNavigate(); 
-
-    useEffect(() => {
-        const fetchDisponibilidade = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/horarios');
-                setDisponibilidade(response.data);
-            } catch (error) {
-                console.error('Erro ao buscar disponibilidade:', error);
-            }
-        };
-
-        fetchDisponibilidade();
-    }, []);
-
-    const atualizarVagas = async () => {
-        try {
-            const dataSelecionada = disponibilidade.find(d => d.data === data);
-            if (dataSelecionada) {
-                const horarioAtualizado = dataSelecionada.horarios.map(horario => 
-                    horario.horario === horarioSelecionado && horario.vagas > 0
-                        ? { ...horario, vagas: horario.vagas - 1 }
-                        : horario
-                );
-                await axios.put(`http://localhost:5000/horarios/${data}`, { 
-                    ...dataSelecionada,
-                    horarios: horarioAtualizado
-                });
-            }
-        } catch (error) {
-            console.error('Erro ao atualizar vagas:', error);
-        }
-    };
 
     const agendarHorario = async () => {
         if (!validarEmail(email)) {
@@ -65,14 +32,14 @@ const Formulario = () => {
             return;
         }
         const dataSelecionada = new Date(data);
-        const hoje = new Date();
+ 
 
         if (isWeekend(dataSelecionada)) {
             setErrorData('Não é possível selecionar sábados ou domingos.');
             return;
         }
 
-        if (differenceInDays(dataSelecionada, hoje) < 2) {
+        if (!validarAntecedencia(dataSelecionada)) {
             setErrorData('A reserva deve ser feita com pelo menos 2 dias de antecedência.');
             return;
         }
@@ -90,7 +57,7 @@ const Formulario = () => {
                 codigoTicket
             });
 
-            await atualizarVagas();
+            
             navigate('/ticket', {
                 state: {
                     codigo: codigoTicket,
@@ -124,7 +91,15 @@ const Formulario = () => {
         const regex = new RegExp('^((1[1-9])|([2-9][0-9]))((3[0-9]{3}[0-9]{4})|(9[0-9]{3}[0-9]{5}))$');
         return regex.test(telefone);
     };
-
+    const validarAntecedencia = (dataSelecionada) => {
+        const hoje = new Date();
+        const diaSelecionado = dataSelecionada.getDay();
+        const diaHoje = hoje.getDay();
+        const diasDeAntecedencia = (diaSelecionado - diaHoje + 7) % 7;
+    
+        return diasDeAntecedencia >= 2;
+    };
+    
     return (
         <div>
             <section className='formulario'>

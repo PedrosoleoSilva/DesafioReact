@@ -13,10 +13,10 @@ const Ticket = () => {
             <h3>Seu Ticket de Reserva</h3>
             <div className='ticket-content'>
                 <div className='ticket-esquerdo'>
-                    <p><strong>Nome:</strong> {ticket.nome || 'Nome não disponível'}</p>
-                    <p><strong>Data da Reserva:</strong> {ticket.data || 'Data não disponível'}</p>
-                    <p><strong>Telefone:</strong> {ticket.telefone || 'Telefone não disponível'}</p>
-                    <p><strong>Horário:</strong> {ticket.horario || 'Horário não disponível'}</p>
+                    <p><strong>Nome: </strong> {ticket.nome || 'Nome não disponível'}</p>
+                    <p><strong>Data da Reserva: </strong> {ticket.data || 'Data não disponível'}</p>
+                    <p><strong>Telefone: </strong> {ticket.telefone || 'Telefone não disponível'}</p>
+                    <p><strong>Horário: </strong> {ticket.horario || 'Horário não disponível'}</p>
                     <img src="./assets/expoarte.png" alt="logo ticket"/>
                 </div>
                 <div className='ticket-codigo'>
