@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 import './Formulario.css';
 import CampoTexto from '../CampoTexto';
@@ -6,6 +7,7 @@ import Botao from '../Botao';
 import ListaDisponibilidade from '../ListaDisponibilidade';
 import { isWeekend, differenceInDays } from 'date-fns';
 import DataNascimento from '../CalendarioDataNascimento';
+import { v4 as uuidv4 } from 'uuid';
 
 const Formulario = () => {
     const [nome, setNome] = useState('');
@@ -19,6 +21,7 @@ const Formulario = () => {
     const [horarioSelecionado, setHorarioSelecionado] = useState('');
     const [data, setData] = useState('');
     const [disponibilidade, setDisponibilidade] = useState([]);
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchDisponibilidade = async () => {
@@ -75,6 +78,7 @@ const Formulario = () => {
         }
 
         try {
+            const codigoTicket = uuidv4();
             await axios.post("http://localhost:5000/agenda", {
                 nome,
                 email,
@@ -82,13 +86,20 @@ const Formulario = () => {
                 telefone,
                 cidade,
                 data,
-                horarioSelecionado
+                horarioSelecionado,
+                codigoTicket
             });
 
-            // Atualizar vagas após sucesso na reserva
             await atualizarVagas();
-
-            alert("Sua Reserva foi Realizada com Sucesso!");
+            navigate('/ticket', {
+                state: {
+                    codigo: codigoTicket,
+                    nome,
+                    telefone,
+                    data,
+                    horario: horarioSelecionado
+                }
+            });
             setNome('');
             setEmail('');
             setDataNascimento('');
