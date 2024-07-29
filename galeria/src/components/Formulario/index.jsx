@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
-import CampoTexto from '../CampoTexto';
-import './Formulario.css';
-import Botao from '../Botao';
-import ListaHorario from '../ListaHorario';
-import Calendario from '../Calendario';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { isWeekend } from 'date-fns';
+import './Formulario.css';
+import CampoTexto from '../CampoTexto';
+import Botao from '../Botao';
+import ListaDisponibilidade from '../ListaDisponibilidade';
+import { isWeekend, differenceInDays } from 'date-fns';
 import DataNascimento from '../CalendarioDataNascimento';
-import { FaUser, FaEnvelope, FaPhone, FaCity } from 'react-icons/fa';
 
 const Formulario = () => {
     const [nome, setNome] = useState('');
@@ -18,57 +16,41 @@ const Formulario = () => {
     const [errorEmail, setErrorEmail] = useState('');
     const [errorTelefone, setErrorTelefone] = useState('');
     const [errorData, setErrorData] = useState('');
-    const [horarios, setHorarios] = useState([]);
     const [horarioSelecionado, setHorarioSelecionado] = useState('');
-    const [data, setData] = useState(null); 
-    const [horariosData, setHorariosData] = useState([]);
-    const [dataId, setDataId] = useState('');
+    const [data, setData] = useState('');
+    const [disponibilidade, setDisponibilidade] = useState([]);
 
-    const listaHorario = async (selectedDate) => {
+    useEffect(() => {
+        const fetchDisponibilidade = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/horarios');
+                setDisponibilidade(response.data);
+            } catch (error) {
+                console.error('Erro ao buscar disponibilidade:', error);
+            }
+        };
+
+        fetchDisponibilidade();
+    }, []);
+
+    const atualizarVagas = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/horarios?data=${selectedDate}`);
-            const dataExistente = response.data[0];
-    
-            if (dataExistente) {
-                setHorarios(dataExistente.horarios);
-                setHorariosData(response.data); 
-                setDataId(dataExistente.id);
-            } else {
-                const todosHorarios = await axios.get('http://localhost:5000/horarios');
-                const horariosExistentes = todosHorarios.data;
-                const proximoId = horariosExistentes.length
-                    ? (Math.max(...horariosExistentes.map(h => parseInt(h.id))) + 1).toString()
-                    : '1';
-                const novoRegistro = {
-                    id: proximoId,
-                    data: selectedDate,
-                    horarios: [
-                        { horario: "08:00", vagas: 20 },
-                        { horario: "09:00", vagas: 20 },
-                        { horario: "10:00", vagas: 20 },
-                        { horario: "11:00", vagas: 20 },
-                        { horario: "14:00", vagas: 20 },
-                        { horario: "15:00", vagas: 20 },
-                        { horario: "16:00", vagas: 20 },
-                        { horario: "17:00", vagas: 20 }
-                    ]
-                };
-
-                await axios.post('http://localhost:5000/horarios', novoRegistro);
-                setHorarios(novoRegistro.horarios);
-                setHorariosData([novoRegistro]); 
-                setDataId(novoRegistro.id);
+            const dataSelecionada = disponibilidade.find(d => d.data === data);
+            if (dataSelecionada) {
+                const horarioAtualizado = dataSelecionada.horarios.map(horario => 
+                    horario.horario === horarioSelecionado && horario.vagas > 0
+                        ? { ...horario, vagas: horario.vagas - 1 }
+                        : horario
+                );
+                await axios.put(`http://localhost:5000/horarios/${data}`, { 
+                    ...dataSelecionada,
+                    horarios: horarioAtualizado
+                });
             }
         } catch (error) {
-            console.error("Erro ao listar ou criar horários:", error);
+            console.error('Erro ao atualizar vagas:', error);
         }
     };
-    
-    useEffect(() => {
-        if (data) {
-            listaHorario(data.toISOString().split('T')[0]);
-        }
-    }, [data]);
 
     const agendarHorario = async () => {
         if (!validarEmail(email)) {
@@ -79,48 +61,34 @@ const Formulario = () => {
             setErrorTelefone('Por favor insira um número válido');
             return;
         }
-        if (isWeekend(new Date(data))) {
+        const dataSelecionada = new Date(data);
+        const hoje = new Date();
+
+        if (isWeekend(dataSelecionada)) {
             setErrorData('Não é possível selecionar sábados ou domingos.');
             return;
         }
-    
+
+        if (differenceInDays(dataSelecionada, hoje) < 2) {
+            setErrorData('A reserva deve ser feita com pelo menos 2 dias de antecedência.');
+            return;
+        }
+
         try {
             await axios.post("http://localhost:5000/agenda", {
-                nome: nome,
-                email: email,
-                dataNascimento: dataNascimento,
-                telefone: telefone,
-                cidade: cidade,
-                data: data.toISOString().split('T')[0],
-                horarioSelecionado: horarioSelecionado
+                nome,
+                email,
+                dataNascimento,
+                telefone,
+                cidade,
+                data,
+                horarioSelecionado
             });
 
-            const formattedDate = data.toISOString().split('T')[0];
-            const horariosDataAtualizados = horariosData.find(d => d.data === formattedDate);
-            
-            if (horariosDataAtualizados) {
-                const horarioAtualizado = horariosDataAtualizados.horarios.map(horario => {
-                    if (horario.horario === horarioSelecionado) {
-                        if (horario.vagas > 0) {
-                            return { ...horario, vagas: horario.vagas - 1 };
-                        } else {
-                            alert('Não há mais vagas disponíveis para o horário selecionado.');
-                            return horario;
-                        }
-                    }
-                    return horario;
-                });
+            // Atualizar vagas após sucesso na reserva
+            await atualizarVagas();
 
-                if (dataId) {
-                    await axios.patch(`http://localhost:5000/horarios/${dataId}`, {
-                        horarios: horarioAtualizado
-                    });
-
-                    setHorarios(horarioAtualizado);
-                }
-            }
             alert("Sua Reserva foi Realizada com Sucesso!");
-
             setNome('');
             setEmail('');
             setDataNascimento('');
@@ -129,15 +97,12 @@ const Formulario = () => {
             setErrorEmail('');
             setErrorTelefone('');
             setHorarioSelecionado('');
-            setData(null);
+            setData('');
             setErrorData('');
-        
-            listaHorario(formattedDate);
         } catch (error) {
-            console.error("Erro ao realizar a reserva:", error);
+            console.error(error);
         }
     };
-    
 
     const validarEmail = (email) => {
         const regex = /^[^\s@]+@(gmail\.com|hotmail\.com)$/;
@@ -155,41 +120,26 @@ const Formulario = () => {
                 <form onSubmit={(evento) => { evento.preventDefault(); agendarHorario(); }}>
                     <h3>Preencha o Card Abaixo para Realizar o Agendamento da Visita</h3>
                     <div className='form'>
-                        <Calendario
-                            label="Selecione uma data"
-                            selected={data}
-                            onChange={date => setData(date)}
-                            placeholderText="Selecione Uma data"
-                        />
-                        <ListaHorario
-                            label="Horário"
-                            obrigatorio
-                            options={horarios}
-                            valor={horarioSelecionado}
-                            aoAlterado={valor => setHorarioSelecionado(valor)}
+                        <ListaDisponibilidade
+                            onDataSelect={setData}
+                            onHorarioSelect={setHorarioSelecionado}
                         />
                     </div>
-                    <div className="input">
-                        <FaUser className="input-icon" />
-                        <CampoTexto
-                            label="Nome"
-                            placeholder="Digite o Seu Nome"
-                            obrigatorio
-                            valor={nome}
-                            aoAlterado={valor => setNome(valor)}
-                        />
-                    </div>
-                    <div className="input">
-                        <FaEnvelope className="input-icon" />
-                        <CampoTexto
-                            label="Email"
-                            placeholder="Digite o Seu Email"
-                            obrigatorio
-                            valor={email}
-                            aoAlterado={valor => setEmail(valor)}
-                        />
-                        {errorEmail && <p className="erro">{errorEmail}</p>}
-                    </div>
+                    <CampoTexto
+                        label="Nome"
+                        placeholder="Digite o Seu Nome"
+                        obrigatorio
+                        valor={nome}
+                        aoAlterado={valor => setNome(valor)}
+                    />
+                    <CampoTexto
+                        label="Email"
+                        placeholder="Digite o Seu Email"
+                        obrigatorio
+                        valor={email}
+                        aoAlterado={valor => setEmail(valor)}
+                    />
+                    {errorEmail && <p className="erro">{errorEmail}</p>}
                     <DataNascimento
                         label="Data Nascimento"
                         selected={dataNascimento}
@@ -198,28 +148,22 @@ const Formulario = () => {
                         placeholderText="Selecione uma data"
                         className="campo-data"
                     />
-                    <div className="input">
-                        <FaPhone className="input-icon" />
-                        <CampoTexto
-                            label="Telefone"
-                            placeholder="Digite o seu Numero de Telefone"
-                            obrigatorio
-                            valor={telefone}
-                            aoAlterado={valor => setTelefone(valor)}
-                        />
-                        {errorTelefone && <p className="erro">{errorTelefone}</p>}
-                    </div>
-                    <div className="input">
-                        <FaCity className="input-icon" />
-                        <CampoTexto
-                            label="Cidade"
-                            placeholder="Digite a sua Cidade"
-                            obrigatorio
-                            valor={cidade}
-                            aoAlterado={valor => setCidade(valor)}
-                        />
-                        {errorData && <p className="erro">{errorData}</p>}
-                    </div>
+                    <CampoTexto
+                        label="Telefone"
+                        placeholder="Digite o seu Numero de Telefone"
+                        obrigatorio
+                        valor={telefone}
+                        aoAlterado={valor => setTelefone(valor)}
+                    />
+                    {errorTelefone && <p className="erro">{errorTelefone}</p>}
+                    <CampoTexto
+                        label="Cidade"
+                        placeholder="Digite a sua Cidade"
+                        obrigatorio
+                        valor={cidade}
+                        aoAlterado={valor => setCidade(valor)}
+                    />
+                    {errorData && <p className="erro">{errorData}</p>}
                     <Botao>
                         Enviar Card
                     </Botao>

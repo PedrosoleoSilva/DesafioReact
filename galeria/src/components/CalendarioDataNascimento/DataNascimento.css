@@ -1,8 +1,20 @@
 .calendario {
     margin: 24px 0;
 }
+
 .calendario label {
     display: block;
-    font-size: 24px;
+    font-size: 24px; 
     margin-bottom: 8px;
 }
+
+.date {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+

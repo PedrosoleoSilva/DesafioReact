@@ -1,0 +1,22 @@
+.lista label {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.lista select {
+    font-size: 18px;
+    font-weight: 400;
+    padding: 18px;
+    background-color: #ffffff; 
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+}
+
+.lista select:focus {
+    border-color: #007bff;
+    outline: none;
+}
