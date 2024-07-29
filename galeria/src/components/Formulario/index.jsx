@@ -5,7 +5,7 @@ import './Formulario.css';
 import CampoTexto from '../CampoTexto';
 import Botao from '../Botao';
 import ListaDisponibilidade from '../ListaDisponibilidade';
-import { isWeekend } from 'date-fns';
+import {  differenceInYears } from 'date-fns';
 import DataNascimento from '../CalendarioDataNascimento';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,9 +18,17 @@ const Formulario = () => {
     const [errorEmail, setErrorEmail] = useState('');
     const [errorTelefone, setErrorTelefone] = useState('');
     const [errorData, setErrorData] = useState('');
+    const [errorIdade, setErrorIdade] = useState('');
     const [horarioSelecionado, setHorarioSelecionado] = useState('');
     const [data, setData] = useState('');
     const navigate = useNavigate(); 
+
+    const validarIdade = (dataNascimento) => {
+        const hoje = new Date();
+        const nascimento = new Date(dataNascimento);
+        const idade = differenceInYears(hoje, nascimento);
+        return idade >= 16;
+    };
 
     const agendarHorario = async () => {
         if (!validarEmail(email)) {
@@ -31,13 +39,12 @@ const Formulario = () => {
             setErrorTelefone('Por favor insira um número válido');
             return;
         }
-        const dataSelecionada = new Date(data);
- 
-
-        if (isWeekend(dataSelecionada)) {
-            setErrorData('Não é possível selecionar sábados ou domingos.');
+        if (!validarIdade(dataNascimento)) {
+            setErrorIdade('Você deve ter pelo menos 16 anos.');
             return;
         }
+
+        const dataSelecionada = new Date(data);
 
         if (!validarAntecedencia(dataSelecionada)) {
             setErrorData('A reserva deve ser feita com pelo menos 2 dias de antecedência.');
@@ -57,7 +64,6 @@ const Formulario = () => {
                 codigoTicket
             });
 
-            
             navigate('/ticket', {
                 state: {
                     codigo: codigoTicket,
@@ -74,6 +80,7 @@ const Formulario = () => {
             setCidade('');
             setErrorEmail('');
             setErrorTelefone('');
+            setErrorIdade('');
             setHorarioSelecionado('');
             setData('');
             setErrorData('');
@@ -91,6 +98,7 @@ const Formulario = () => {
         const regex = new RegExp('^((1[1-9])|([2-9][0-9]))((3[0-9]{3}[0-9]{4})|(9[0-9]{3}[0-9]{5}))$');
         return regex.test(telefone);
     };
+
     const validarAntecedencia = (dataSelecionada) => {
         const hoje = new Date();
         const diaSelecionado = dataSelecionada.getDay();
@@ -99,7 +107,7 @@ const Formulario = () => {
     
         return diasDeAntecedencia >= 2;
     };
-    
+
     return (
         <div>
             <section className='formulario'>
@@ -134,6 +142,7 @@ const Formulario = () => {
                         placeholderText="Selecione uma data"
                         className="campo-data"
                     />
+                    {errorIdade && <p className="erro">{errorIdade}</p>}
                     <CampoTexto
                         label="Telefone"
                         placeholder="Digite o seu Numero de Telefone"

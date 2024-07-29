@@ -196,7 +196,7 @@
       "horarios": [
         {
           "horario": "08:00",
-          "vagas": 20
+          "vagas": 19
         },
         {
           "horario": "09:00",
@@ -337,6 +337,17 @@
       "data": "2024-08-01",
       "horarioSelecionado": "08:00",
       "codigoTicket": "9630e3bc-278b-4d6f-93a9-2f37f8c55940"
+    },
+    {
+      "id": "fd37",
+      "nome": "teste",
+      "email": "teste@gmail.com",
+      "dataNascimento": "2007-07-10T03:00:00.000Z",
+      "telefone": "44997282988",
+      "cidade": "ss",
+      "data": "2024-08-05",
+      "horarioSelecionado": "08:00",
+      "codigoTicket": "7eeef792-e434-482d-bbff-bbf8906b48ed"
     }
   ]
 }
