@@ -216,7 +216,7 @@
         },
         {
           "horario": "15:00",
-          "vagas": 18
+          "vagas": 17
         },
         {
           "horario": "16:00",
@@ -370,6 +370,17 @@
       "data": "2024-08-05",
       "horarioSelecionado": "15:00",
       "codigoTicket": "b6ab9a89-933b-4140-8fc2-82476342c47e"
+    },
+    {
+      "id": "b8bb",
+      "nome": "ss",
+      "email": "ff@gmail.com",
+      "dataNascimento": "1996-07-03T03:00:00.000Z",
+      "telefone": "44997282988",
+      "cidade": "dd",
+      "data": "2024-08-05",
+      "horarioSelecionado": "15:00",
+      "codigoTicket": "16818af6-2852-4eb1-8992-0cd704520df4"
     }
   ]
 }

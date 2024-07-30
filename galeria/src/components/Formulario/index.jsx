@@ -61,7 +61,7 @@ const Formulario = () => {
                 horarioSelecionado,
                 codigoTicket
             });
-
+            alert('Reservar foi Realizada com Sucesso')
             navigate('/ticket', {
                 state: {
                     codigo: codigoTicket,
