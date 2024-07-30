@@ -2,44 +2,6 @@
   "horarios": [
     {
       "id": "1",
-      "data": "2024-07-29",
-      "horarios": [
-        {
-          "horario": "08:00",
-          "vagas": 20
-        },
-        {
-          "horario": "09:00",
-          "vagas": 20
-        },
-        {
-          "horario": "10:00",
-          "vagas": 20
-        },
-        {
-          "horario": "11:00",
-          "vagas": 20
-        },
-        {
-          "horario": "14:00",
-          "vagas": 20
-        },
-        {
-          "horario": "15:00",
-          "vagas": 20
-        },
-        {
-          "horario": "16:00",
-          "vagas": 20
-        },
-        {
-          "horario": "17:00",
-          "vagas": 20
-        }
-      ]
-    },
-    {
-      "id": "2",
       "data": "2024-07-30",
       "horarios": [
         {
@@ -77,7 +39,7 @@
       ]
     },
     {
-      "id": "3",
+      "id": "2",
       "data": "2024-07-31",
       "horarios": [
         {
@@ -110,21 +72,21 @@
         },
         {
           "horario": "17:00",
-          "vagas": 17
+          "vagas": 20
         }
       ]
     },
     {
-      "id": "4",
+      "id": "3",
       "data": "2024-08-01",
       "horarios": [
         {
           "horario": "08:00",
-          "vagas": 19
+          "vagas": 20
         },
         {
           "horario": "09:00",
-          "vagas": 14
+          "vagas": 20
         },
         {
           "horario": "10:00",
@@ -136,7 +98,7 @@
         },
         {
           "horario": "14:00",
-          "vagas": 19
+          "vagas": 20
         },
         {
           "horario": "15:00",
@@ -153,7 +115,7 @@
       ]
     },
     {
-      "id": "5",
+      "id": "4",
       "data": "2024-08-02",
       "horarios": [
         {
@@ -191,7 +153,7 @@
       ]
     },
     {
-      "id": "6",
+      "id": "5",
       "data": "2024-08-05",
       "horarios": [
         {
@@ -200,7 +162,7 @@
         },
         {
           "horario": "09:00",
-          "vagas": 19
+          "vagas": 20
         },
         {
           "horario": "10:00",
@@ -216,7 +178,45 @@
         },
         {
           "horario": "15:00",
-          "vagas": 17
+          "vagas": 20
+        },
+        {
+          "horario": "16:00",
+          "vagas": 20
+        },
+        {
+          "horario": "17:00",
+          "vagas": 20
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "data": "2024-08-06",
+      "horarios": [
+        {
+          "horario": "08:00",
+          "vagas": 20
+        },
+        {
+          "horario": "09:00",
+          "vagas": 20
+        },
+        {
+          "horario": "10:00",
+          "vagas": 20
+        },
+        {
+          "horario": "11:00",
+          "vagas": 20
+        },
+        {
+          "horario": "14:00",
+          "vagas": 20
+        },
+        {
+          "horario": "15:00",
+          "vagas": 20
         },
         {
           "horario": "16:00",
@@ -231,156 +231,15 @@
   ],
   "agenda": [
     {
-      "id": "fa62",
-      "nome": "dd",
-      "email": "dd@gmail.com",
-      "dataNascimento": "2024-07-09T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "ss",
-      "data": "2024-08-01",
-      "horarioSelecionado": ""
-    },
-    {
-      "id": "c0a1",
-      "nome": "thor",
-      "email": "thor@gmail.com",
-      "dataNascimento": "2024-07-08T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "fff",
-      "data": "2024-08-01",
-      "horarioSelecionado": "11:00"
-    },
-    {
-      "id": "2d5e",
-      "nome": "Felipe",
-      "email": "felipe@gmail.com",
-      "dataNascimento": "2024-07-08T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "Mambore",
-      "data": "2024-08-01",
-      "horarioSelecionado": "14:00",
-      "codigoTicket": "9d4a3be2-af9d-45bd-b905-d21f35402c92"
-    },
-    {
-      "id": "a335",
-      "nome": "Leonardo Pedroso",
-      "email": "leosilva@gmail.com",
-      "dataNascimento": "2024-07-08T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "moura",
-      "data": "2024-08-01",
-      "horarioSelecionado": "09:00",
-      "codigoTicket": "d23f9f56-cb79-4748-afb7-edac2b82fcd3"
-    },
-    {
-      "id": "6df3",
-      "nome": "Emerson",
-      "email": "erme@gmail.com",
-      "dataNascimento": "2024-07-01T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "ddd",
-      "data": "2024-08-01",
-      "horarioSelecionado": "09:00",
-      "codigoTicket": "3a32b796-74f1-40ec-9bb1-c71959aba9fc"
-    },
-    {
-      "id": "116a",
+      "id": "c948",
       "nome": "Teste",
       "email": "teste@gmail.com",
-      "dataNascimento": "2024-07-01T03:00:00.000Z",
+      "dataNascimento": "2000-07-05T03:00:00.000Z",
       "telefone": "44997282988",
-      "cidade": "ss",
-      "data": "2024-08-01",
-      "horarioSelecionado": "09:00",
-      "codigoTicket": "f00c3aa0-bf82-4e25-adff-4be1f12852a2"
-    },
-    {
-      "id": "08ed",
-      "nome": "Leonardo",
-      "email": "leo@gmail.com",
-      "dataNascimento": "2024-06-30T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "Campo Mourão",
-      "data": "2024-08-01",
-      "horarioSelecionado": "09:00",
-      "codigoTicket": "0c56da1b-66c4-40c2-9735-35db51c2f546"
-    },
-    {
-      "id": "8926",
-      "nome": "Felipe Augusto",
-      "email": "fezao@gmail.com",
-      "dataNascimento": "2024-07-09T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "ss",
-      "data": "2024-08-01",
-      "horarioSelecionado": "09:00",
-      "codigoTicket": "2c6684e0-8cbd-44c1-bbc9-4c605315e9a9"
-    },
-    {
-      "id": "88ba",
-      "nome": "teste2",
-      "email": "teste2@gmail.com",
-      "dataNascimento": "2024-07-01T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "moura",
-      "data": "2024-08-01",
-      "horarioSelecionado": "08:00",
-      "codigoTicket": "054cf8b2-918c-4f25-bdf1-d339d67a31ad"
-    },
-    {
-      "id": "9ceb",
-      "nome": "ddd",
-      "email": "ddd@gmail.com",
-      "dataNascimento": "2024-07-08T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "dd",
-      "data": "2024-08-01",
-      "horarioSelecionado": "08:00",
-      "codigoTicket": "9630e3bc-278b-4d6f-93a9-2f37f8c55940"
-    },
-    {
-      "id": "fd37",
-      "nome": "teste",
-      "email": "teste@gmail.com",
-      "dataNascimento": "2007-07-10T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "ss",
+      "cidade": "teste",
       "data": "2024-08-05",
       "horarioSelecionado": "08:00",
-      "codigoTicket": "7eeef792-e434-482d-bbff-bbf8906b48ed"
-    },
-    {
-      "id": "a3a7",
-      "nome": "leo",
-      "email": "teste@gmail.com",
-      "dataNascimento": "2024-07-03T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "dd",
-      "data": "2024-08-05",
-      "horarioSelecionado": "09:00",
-      "codigoTicket": "526d5f0a-30c8-4e49-8243-fb54081a9404"
-    },
-    {
-      "id": "7575",
-      "nome": "rese",
-      "email": "teste@gmail.com",
-      "dataNascimento": "2024-07-08T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "ss",
-      "data": "2024-08-05",
-      "horarioSelecionado": "15:00",
-      "codigoTicket": "b6ab9a89-933b-4140-8fc2-82476342c47e"
-    },
-    {
-      "id": "b8bb",
-      "nome": "ss",
-      "email": "ff@gmail.com",
-      "dataNascimento": "1996-07-03T03:00:00.000Z",
-      "telefone": "44997282988",
-      "cidade": "dd",
-      "data": "2024-08-05",
-      "horarioSelecionado": "15:00",
-      "codigoTicket": "16818af6-2852-4eb1-8992-0cd704520df4"
+      "codigoTicket": "ab6921d9-ba6f-43f9-80e6-12a795029a15"
     }
   ]
 }
