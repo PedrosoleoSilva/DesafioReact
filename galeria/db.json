@@ -200,7 +200,7 @@
         },
         {
           "horario": "09:00",
-          "vagas": 20
+          "vagas": 19
         },
         {
           "horario": "10:00",
@@ -216,7 +216,7 @@
         },
         {
           "horario": "15:00",
-          "vagas": 20
+          "vagas": 18
         },
         {
           "horario": "16:00",
@@ -348,6 +348,28 @@
       "data": "2024-08-05",
       "horarioSelecionado": "08:00",
       "codigoTicket": "7eeef792-e434-482d-bbff-bbf8906b48ed"
+    },
+    {
+      "id": "a3a7",
+      "nome": "leo",
+      "email": "teste@gmail.com",
+      "dataNascimento": "2024-07-03T03:00:00.000Z",
+      "telefone": "44997282988",
+      "cidade": "dd",
+      "data": "2024-08-05",
+      "horarioSelecionado": "09:00",
+      "codigoTicket": "526d5f0a-30c8-4e49-8243-fb54081a9404"
+    },
+    {
+      "id": "7575",
+      "nome": "rese",
+      "email": "teste@gmail.com",
+      "dataNascimento": "2024-07-08T03:00:00.000Z",
+      "telefone": "44997282988",
+      "cidade": "ss",
+      "data": "2024-08-05",
+      "horarioSelecionado": "15:00",
+      "codigoTicket": "b6ab9a89-933b-4140-8fc2-82476342c47e"
     }
   ]
 }

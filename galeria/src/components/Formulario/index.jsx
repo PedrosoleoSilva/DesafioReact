@@ -5,14 +5,14 @@ import './Formulario.css';
 import CampoTexto from '../CampoTexto';
 import Botao from '../Botao';
 import ListaDisponibilidade from '../ListaDisponibilidade';
-import {  differenceInYears } from 'date-fns';
+import { differenceInYears } from 'date-fns';
 import DataNascimento from '../CalendarioDataNascimento';
 import { v4 as uuidv4 } from 'uuid';
 
 const Formulario = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
-    const [dataNascimento, setDataNascimento] = useState('');
+    const [dataNascimento, setDataNascimento] = useState(null);
     const [telefone, setTelefone] = useState('');
     const [cidade, setCidade] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
@@ -39,15 +39,13 @@ const Formulario = () => {
             setErrorTelefone('Por favor insira um número válido');
             return;
         }
-        if (!validarIdade(dataNascimento)) {
-            setErrorIdade('Você deve ter pelo menos 16 anos.');
-            return;
-        }
-
         const dataSelecionada = new Date(data);
-
         if (!validarAntecedencia(dataSelecionada)) {
             setErrorData('A reserva deve ser feita com pelo menos 2 dias de antecedência.');
+            return;
+        }
+        if (!validarIdade(dataNascimento)) {
+            setErrorIdade('Você deve ter pelo menos 16 anos.');
             return;
         }
 
@@ -75,7 +73,7 @@ const Formulario = () => {
             });
             setNome('');
             setEmail('');
-            setDataNascimento('');
+            setDataNascimento(null);
             setTelefone('');
             setCidade('');
             setErrorEmail('');
